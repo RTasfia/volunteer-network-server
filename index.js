@@ -47,7 +47,7 @@ MongoClient .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, f
     })
 
     // User database
-    const userCollection = client.db("allVolunteer").collection("user");
+    const userCollection = client.db("volunteeringActivities").collection("user");
     // Add User
     app.post("/addUser", (req,res) => {
         const newUser = req.body;
@@ -76,6 +76,7 @@ MongoClient .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, f
         })
     })
 
+    // Delete user
     app.delete("/delete/:id", (req, res) => {
         console.log(req.params.id)
         userCollection.deleteOne({_id: ObjectID(req.params.id)})
@@ -90,7 +91,4 @@ MongoClient .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, f
 
 
 
-app.get("/", (req, res) => {
-    res.send("listening");
-})
-app.listen(5000);
+app.listen(process.env.PORT || 5000);
