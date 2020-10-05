@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
 // U4ia3TRCTR9K4MR
-const pass = "yrfgSbbbYOLRj1S5";
+const pass = "xp5q3HPwnk0Bhsuf";
 const val = "volunteerNetwork";
 
 app.use(cors());
@@ -11,13 +11,13 @@ app.use(bodyParser.json());
 
 const ObjectID = require('mongodb').ObjectID;
 const MongoClient = require('mongodb').MongoClient;
-var uri = "mongodb://volunteerNetwork:yrfgSbbbYOLRj1S5@cluster0-shard-00-00.ibh58.mongodb.net:27017,cluster0-shard-00-01.ibh58.mongodb.net:27017,cluster0-shard-00-02.ibh58.mongodb.net:27017/volunteeringActivities?ssl=true&replicaSet=atlas-60jtz6-shard-0&authSource=admin&retryWrites=true&w=majority";
+var uri = "mongodb://volunteerNetwork:xp5q3HPwnk0Bhsuf@cluster0-shard-00-00.ibh58.mongodb.net:27017,cluster0-shard-00-01.ibh58.mongodb.net:27017,cluster0-shard-00-02.ibh58.mongodb.net:27017/volunteeringActivities?ssl=true&replicaSet=atlas-60jtz6-shard-0&authSource=admin&retryWrites=true&w=majority";
 MongoClient .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
     console.log(err);
     console.log("done");
 
     // Event database
-    const eventCollection = client.db("volunteeringActivities").collection("events");
+    const eventCollection = client.db("volunteeringActivities").collection("event");
     // All events
     app.post("/allEvents", (req, res) => {
         const newEvent = req.body;
@@ -89,6 +89,8 @@ MongoClient .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, f
     })
 });
 
+app.get("/currentUser", (req,res)=> {
+    res.send("hello")
+})
 
-
-app.listen(process.env.PORT || 5000);
+app.listen(process.env.PORT ||5000);
